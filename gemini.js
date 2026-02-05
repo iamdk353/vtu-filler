@@ -14,7 +14,7 @@ Based on the user's brief description of their work, generate a comprehensive di
 
 1. description (Work Summary): A detailed 2-3 paragraph description of the work done (150-300 words)
 2. hours: Estimated hours worked (between 3-8, can use decimals like 6.5)
-3. links: Relevant reference links (if applicable, comma-separated, or leave empty)
+3. links: Relevant reference links if applicable, comma-separated
 4. learnings: Key learnings and outcomes from the work (100-200 words)
 5. blockers: Any blockers or challenges faced (50-100 words, or leave empty if none)
 6. skills: Comma-separated list of technical skills used (e.g., JavaScript, React, Node.js, Python, etc.)
