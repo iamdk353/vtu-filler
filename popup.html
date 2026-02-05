@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Form Filler</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --card: #fffdfa;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --accent-soft: #d1fae5;
+      --accent-2: #f59e0b;
+      --bg: #f4f6f3;
+      --shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 392px;
+      padding: 18px;
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(140% 90% at 0% 0%, rgba(15, 118, 110, 0.16), transparent 52%),
+        radial-gradient(120% 90% at 100% 0%, rgba(245, 158, 11, 0.12), transparent 58%),
+        linear-gradient(180deg, #f7f5f0 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+
+    .container {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15, 118, 110, 0.08);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    h1 {
+      font-size: 20px;
+      color: var(--accent-dark);
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      border: 1px solid rgba(15, 118, 110, 0.15);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #ffffff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: rgba(15, 118, 110, 0.7);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
+    }
+
+    textarea {
+      resize: none;
+      min-height: 64px;
+      overflow: hidden;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      flex: 1;
+      padding: 11px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: white;
+      box-shadow: 0 8px 18px rgba(15, 118, 110, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(15, 118, 110, 0.3);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .status {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      display: none;
+    }
+
+    .status.success {
+      background: #dcfce7;
+      color: #14532d;
+      border: 1px solid #86efac;
+    }
+
+    .status.error {
+      background: #fee2e2;
+      color: #7f1d1d;
+      border: 1px solid #fecaca;
+    }
+
+    .status.show {
+      display: block;
+      animation: slideIn 0.25s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .helper-text {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .btn-ai {
+      background: linear-gradient(135deg, var(--accent-2) 0%, #d97706 100%);
+      color: #1f2937;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      box-shadow: 0 10px 18px rgba(217, 119, 6, 0.22);
+    }
+
+    .btn-ai:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(217, 119, 6, 0.3);
+    }
+
+    .btn-ai:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 16px 0;
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .divider span {
+      padding: 0 10px;
+    }
+
+    .save-key-btn {
+      padding: 10px 12px;
+      background: var(--accent-dark);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .save-key-btn:hover {
+      background: #0f4f4a;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .footer {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px dashed #e5e7eb;
+      padding-top: 12px;
+    }
+
+    .footer a {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title-wrap">
+        <h1>AI Form Filler</h1>
+        <p class="subtitle">Fill internship diary forms automatically</p>
+      </div>
+      <span class="chip">Gemini AI</span>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div class="form-group">
+      <label for="apiKey">Gemini API Key</label>
+      <div style="display: flex; gap: 8px;">
+        <input type="password" id="apiKey" placeholder="Enter your Gemini API key">
+        <button class="save-key-btn" id="saveKeyBtn" title="Save API Key">Save</button>
+      </div>
+      <div class="helper-text">Get your free API key from <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a></div>
+    </div>
+
+    <div class="form-group">
+      <label for="prompt">Quick Description</label>
+      <input type="text" id="prompt" placeholder="e.g., Worked on React frontend for user dashboard">
+      <div class="helper-text">Describe your work in one line. AI will generate the rest.</div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn-ai" id="aiGenerateBtn">Generate with AI</button>
+    </div>
+
+    <div class="divider">
+      <span>OR FILL MANUALLY</span>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Work Summary *</label>
+      <textarea id="description" placeholder="Briefly describe the work you did today..."></textarea>
+      <div class="helper-text">Max 2000 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="hours">Hours Worked *</label>
+      <input type="number" id="hours" placeholder="e.g. 6.5" min="0" max="24" step="0.25" value="3">
+      <div class="helper-text">Range: 0-24 (supports 0.25 steps)</div>
+    </div>
+
+    <div class="form-group">
+      <label for="links">Reference Links</label>
+      <textarea id="links" placeholder="Paste one or more relevant links, separated by commas"></textarea>
+      <div class="helper-text">Max 5000 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="learnings">Learnings / Outcomes *</label>
+      <textarea id="learnings" placeholder="What did you learn or ship today?"></textarea>
+      <div class="helper-text">Max 2000 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="blockers">Blockers / Risks</label>
+      <textarea id="blockers" placeholder="Anything that slowed you down?"></textarea>
+      <div class="helper-text">Max 1000 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="skills">Skills Used * (comma-separated)</label>
+      <div class="skills-input">
+        <input type="text" id="skills" placeholder="e.g., JavaScript, React, Node.js">
+      </div>
+      <div class="helper-text">Enter skills separated by commas</div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn-secondary" id="saveBtn">Save Data</button>
+      <button class="btn-primary" id="fillBtn">Fill Form</button>
+    </div>
+
+    <div class="footer">
+      <span>Need help?</span>
+      <a href="docs.html" target="_blank">Open documentation</a>
+    </div>
+  </div>
+
+  <script src="gemini.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

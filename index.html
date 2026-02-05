@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Form Filler Documentation</title>
+    <link rel="stylesheet" href="docs.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">AI Form Filler</p>
+          <h1>Setup and Usage Guide</h1>
+          <p class="lead">
+            A clean, step-by-step guide to install the extension, connect Gemini
+            AI, and fill internship diary forms in minutes.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#setup">Start Setup</a>
+            <a class="btn ghost" href="#daily">Daily Use</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h2>Quick Demo</h2>
+          <p class="demo-label">Input</p>
+          <p class="demo">
+            Built a user authentication system with JWT tokens.
+          </p>
+          <div class="divider"></div>
+          <p class="demo-label">AI Generates</p>
+          <ul class="demo-list">
+            <li>Detailed work summary (200+ words)</li>
+            <li>Estimated hours (about 6.5 hours)</li>
+            <li>Key learnings and outcomes</li>
+            <li>Skills used and reference links</li>
+          </ul>
+        </div>
+      </header>
+
+      <nav class="toc">
+        <a href="#guide-video">Guide Video</a>
+        <a href="#setup">Quick Setup</a>
+        <a href="#install">Install Extension</a>
+        <a
+          href="https://github.com/iamdk353/vtu-filler/archive/refs/heads/main.zip"
+          >GitHub Download</a
+        >
+        <a href="#daily">Daily Usage</a>
+        <a href="#manual">Manual Entry</a>
+        <a href="#tips">Tips</a>
+        <a href="#troubleshoot">Troubleshooting</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#links">Helpful Links</a>
+      </nav>
+
+      <section id="guide-video" class="section">
+        <div class="section-head">
+          <h2>Guide Video</h2>
+          <p>Watch the full walkthrough before setup.</p>
+        </div>
+        <div class="video-card video-subtitle-wrap">
+          <video
+            id="guideVideo"
+            class="click-play"
+            preload="metadata"
+            playsinline
+          >
+            <source src="GUIDE.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div
+            id="videoSubtitles"
+            class="video-subtitles"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+          <div class="video-controls" aria-hidden="false">
+            <button type="button" id="skipBack" class="control-btn">
+              &lt;
+            </button>
+            <button type="button" id="playPause" class="control-btn">
+              Pause
+            </button>
+            <button type="button" id="skipForward" class="control-btn">
+              &gt;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="setup" class="section">
+        <div class="section-head">
+          <h2>Quick Setup (3 Steps)</h2>
+          <p>Follow the steps below to get running in about 3 minutes.</p>
+        </div>
+        <div class="step-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 80" role="img" aria-label="Key icon">
+                <rect
+                  x="8"
+                  y="8"
+                  width="104"
+                  height="64"
+                  rx="14"
+                  fill="#e6f7f2"
+                />
+                <circle cx="44" cy="40" r="14" fill="#0f766e" />
+                <rect
+                  x="56"
+                  y="36"
+                  width="30"
+                  height="8"
+                  rx="4"
+                  fill="#0f766e"
+                />
+                <rect
+                  x="74"
+                  y="36"
+                  width="6"
+                  height="18"
+                  rx="3"
+                  fill="#0f766e"
+                />
+              </svg>
+            </div>
+            <h3>Get a Free Gemini API Key</h3>
+            <ol>
+              <li>
+                Open Google AI Studio.
+                <a href="https://aistudio.google.com/ " target="_blank">
+                  here</a
+                >
+              </li>
+              <li>Sign in with your Google account.</li>
+              <li>Select Create API Key. on top right corner</li>
+              <li>Choose and existing Project or create a new one</li>
+              <li>Copy the key that starts with "AIza".</li>
+            </ol>
+          </div>
+          <div class="step-card" id="install">
+            <div class="step-number">2</div>
+            <div class="step-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 80" role="img" aria-label="Download icon">
+                <rect
+                  x="8"
+                  y="8"
+                  width="104"
+                  height="64"
+                  rx="14"
+                  fill="#fff4e6"
+                />
+                <path
+                  d="M60 22v24"
+                  stroke="#f59e0b"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M46 36l14 14 14-14"
+                  stroke="#f59e0b"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <rect
+                  x="32"
+                  y="58"
+                  width="56"
+                  height="10"
+                  rx="5"
+                  fill="#f59e0b"
+                />
+              </svg>
+            </div>
+            <h3>Install the Extension</h3>
+            <ol>
+              <li>
+                Download the extension folder extension folder.
+                <a
+                  href="https://github.com/iamdk353/vtu-filler/archive/refs/heads/main.zip"
+                >
+                  here</a
+                >
+              </li>
+              <li>Unzip the extension folder.</li>
+              <li>Open Chrome side bar > Extension > Manage Extension</li>
+              <li>Turn on Developer mode. on top Right</li>
+              <li>Click Load unpacked and select the extracted folder</li>
+            </ol>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 80" role="img" aria-label="Form icon">
+                <rect
+                  x="18"
+                  y="10"
+                  width="84"
+                  height="60"
+                  rx="12"
+                  fill="#eef2ff"
+                />
+                <rect
+                  x="30"
+                  y="26"
+                  width="60"
+                  height="8"
+                  rx="4"
+                  fill="#4f46e5"
+                />
+                <rect
+                  x="30"
+                  y="40"
+                  width="52"
+                  height="6"
+                  rx="3"
+                  fill="#a5b4fc"
+                />
+                <rect
+                  x="30"
+                  y="50"
+                  width="42"
+                  height="6"
+                  rx="3"
+                  fill="#a5b4fc"
+                />
+              </svg>
+            </div>
+            <h3>Configure and Test</h3>
+            <ol>
+              <li>
+                Click the extension icon in Chrome. top right puzzel like icon
+              </li>
+              <li>Click click on Ai Form Filler</li>
+              <li>Paste your API key and click Save.</li>
+              <li>
+                Open your internship website.
+                <a href="https://vtu.internyet.in" target="_blank"> here</a> and
+                login
+              </li>
+              <li>Select the internship and date.</li>
+              <li>
+                open AI Form Filler , Use Generate with AI to fill the form.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="daily" class="section">
+        <div class="section-head">
+          <h2>Daily Usage</h2>
+          <p>Once set up, the daily flow is fast and consistent.</p>
+        </div>
+        <ol class="steps">
+          <li>Open the form page.</li>
+          <li>Type a one-line work description.</li>
+          <li>Click Generate with AI.</li>
+          <li>Review and click Fill Form.</li>
+          <li>Click Save Data for next time.</li>
+        </ol>
+      </section>
+
+      <section id="manual" class="section">
+        <div class="section-head">
+          <h2>Manual Entry</h2>
+          <p>
+            Prefer to write everything yourself? Use manual entry fields in the
+            popup.
+          </p>
+        </div>
+        <ul class="plain-list">
+          <li>Work Summary and Learnings are required.</li>
+          <li>Hours Worked supports 0.25 steps.</li>
+          <li>Reference links are optional.</li>
+          <li>Skills are comma-separated values.</li>
+        </ul>
+      </section>
+
+      <section id="tips" class="section">
+        <div class="section-head">
+          <h2>Tips for Best Results</h2>
+          <p>Specific prompts produce stronger output.</p>
+        </div>
+        <div class="split">
+          <div class="tip good">
+            <h3>Good Prompts</h3>
+            <ul>
+              <li>Built user authentication with JWT and bcrypt.</li>
+              <li>Fixed responsive layout issues on mobile devices.</li>
+              <li>Implemented data visualization dashboard with Chart.js.</li>
+              <li>Debugged payment gateway integration errors.</li>
+            </ul>
+          </div>
+          <div class="tip bad">
+            <h3>Less Effective</h3>
+            <ul>
+              <li>Worked on stuff.</li>
+              <li>Did coding.</li>
+              <li>React, Node, APIs.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="troubleshoot" class="section">
+        <div class="section-head">
+          <h2>Troubleshooting</h2>
+          <p>Common issues and quick fixes.</p>
+        </div>
+        <div class="callout-grid">
+          <div class="callout">
+            <h3>Invalid API key</h3>
+            <p>
+              Confirm the key starts with "AIza" and was copied fully. If
+              needed, generate a new one.
+            </p>
+          </div>
+          <div class="callout">
+            <h3>AI takes too long</h3>
+            <p>
+              Initial generation may take up to 10 seconds. Check your
+              connection and try again.
+            </p>
+          </div>
+          <div class="callout">
+            <h3>Form not filling</h3>
+            <p>
+              Reload the form page, then try again. If the form structure
+              changed, update selectors in content.js.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="privacy" class="section">
+        <div class="section-head">
+          <h2>Privacy and Security</h2>
+          <p>Your data stays on your machine except for Gemini API requests.</p>
+        </div>
+        <ul class="plain-list">
+          <li>API key is stored locally in Chrome storage.</li>
+          <li>Data is sent only to Gemini for generation.</li>
+          <li>No tracking, analytics, or third-party services.</li>
+        </ul>
+      </section>
+
+      <section id="links" class="section">
+        <div class="section-head">
+          <h2>Helpful Links</h2>
+          <p>Open these resources in a new tab.</p>
+        </div>
+        <div class="link-grid">
+          <a href="https://makersuite.google.com/app/apikey" target="_blank"
+            >Google AI Studio</a
+          >
+          <a href="https://ai.google.dev/pricing" target="_blank"
+            >Gemini API Pricing</a
+          >
+          <a
+            href="https://support.google.com/chrome/a/answer/2714278"
+            target="_blank"
+            >Chrome Extension Guide</a
+          >
+          <a href="README.md" target="_blank">README</a>
+          <a href="SETUP.md" target="_blank">Setup Guide</a>
+          <a href="popup.html" target="_blank">Popup UI</a>
+        </div>
+      </section>
+    </div>
+    <script>
+      const subtitleCues = [
+        {
+          start: 7,
+          end: 13,
+          text: "Create a new project if you haven't created one yet.",
+        },
+        {
+          start: 28,
+          end: 38,
+          text: "Extract the files to a folder on your computer.",
+        },
+        {
+          start: 48,
+          end: 53,
+          text: "Select the extracted folder.",
+        },
+        {
+          start: 81,
+          end: 89,
+          text: "Open the internship site and select your internship and date.",
+        },
+        {
+          start: 91,
+          end: 100,
+          text: "Enter a one-line description of your work.",
+        },
+        {
+          start: 100,
+          end: 112,
+          text: "If any error is encoutered in the phase Re Generate it ",
+        },
+        {
+          start: 114,
+          end: 120,
+          text: "Review and make any necessary changes.",
+        },
+        {
+          start: 120,
+          end: 125,
+          text: "Optional fields may be filled automatically or left blank.",
+        },
+        {
+          start: 125,
+          end: 129,
+          text: "Save the data for future use.",
+        },
+        {
+          start: 130,
+          end: 136,
+          text: "If AI-generated skills are found in the skills list, they are added.",
+        },
+      ];
+
+      const video = document.getElementById("guideVideo");
+      const subtitleBox = document.getElementById("videoSubtitles");
+      const skipBack = document.getElementById("skipBack");
+      const skipForward = document.getElementById("skipForward");
+      const playPause = document.getElementById("playPause");
+
+      function updateSubtitles() {
+        const time = video.currentTime || 0;
+        const cue = subtitleCues.find(
+          (item) => time >= item.start && time <= item.end,
+        );
+
+        if (cue) {
+          subtitleBox.textContent = cue.text;
+          subtitleBox.classList.add("active");
+        } else {
+          subtitleBox.textContent = "";
+          subtitleBox.classList.remove("active");
+        }
+      }
+
+      video.addEventListener("timeupdate", updateSubtitles);
+      video.addEventListener("loadedmetadata", updateSubtitles);
+      video.addEventListener("seeked", updateSubtitles);
+      video.addEventListener("loadedmetadata", () => {
+        video.playbackRate = 1.2;
+      });
+
+      function updatePlayLabel() {
+        playPause.textContent = video.paused ? "Play" : "Pause";
+      }
+
+      video.addEventListener("click", () => {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      playPause.addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      video.addEventListener("play", updatePlayLabel);
+      video.addEventListener("pause", updatePlayLabel);
+      video.addEventListener("loadedmetadata", updatePlayLabel);
+
+      function clampTime(value) {
+        if (Number.isNaN(video.duration)) {
+          return Math.max(0, value);
+        }
+        return Math.min(Math.max(0, value), video.duration);
+      }
+
+      skipBack.addEventListener("click", (event) => {
+        event.stopPropagation();
+        video.currentTime = clampTime(video.currentTime - 5);
+      });
+
+      skipForward.addEventListener("click", (event) => {
+        event.stopPropagation();
+        video.currentTime = clampTime(video.currentTime + 5);
+      });
+    </script>
+  </body>
+</html>
